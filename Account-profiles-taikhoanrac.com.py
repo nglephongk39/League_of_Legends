@@ -21,13 +21,13 @@ class account:
 def URL_Page():
     URLs = "https://taikhoanrac.com/?page="
     list_URL = []
-    for URL in range(1,94):
+    for URL in range(12,13):
         URL = URLs + str(URL)
         list_URL.append(URL)
     return list_URL
 print('- Finish URL for Page')
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome('C:\Program Files (x86)\chromedriver.exe')
 sleep(2)
 
 list_account = []
@@ -40,6 +40,7 @@ for page in URL_Page():
         
 
     for profile in profiles: #Lọc từng class và lấy ra tên ingame bằng hàm get_text()
+        
         variableName = account()
 
         all_ = profile.find('div', class_="sl-priftop")
@@ -71,12 +72,14 @@ for page in URL_Page():
                 variableName.URL = URL
 
                 list_account.append(variableName)
-        with open('output.csv', mode ='w', encoding='utf-8-sig', newline = '') as file_output:
-            headers = ['Ingame', 'Price', 'Rank', 'Champ', 'Skin', 'URL']
-            writer = csv.DictWriter(file_output, fieldnames=headers)
-            writer.writeheader()
-            for i in list_account:
-                writer.writerow({headers[0]:i.ingame, headers[1]:i.Price, headers[2]:i.Rank, headers[3]:i.Champ, headers[4]:i.Skin, headers[5]:i.URL})
+
+                print(list_account)
+        # with open('output.csv', mode ='w', encoding='utf-8-sig', newline = '') as file_output:
+        #     headers = ['Ingame', 'Price', 'Rank', 'Champ', 'Skin', 'URL']
+        #     writer = csv.DictWriter(file_output, fieldnames=headers)
+        #     writer.writeheader()
+        #     for i in list_account:
+        #         writer.writerow({headers[0]:i.ingame, headers[1]:i.Price, headers[2]:i.Rank, headers[3]:i.Champ, headers[4]:i.Skin, headers[5]:i.URL})
 
 
 driver.quit()
